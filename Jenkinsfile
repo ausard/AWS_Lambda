@@ -1,5 +1,4 @@
-pipeline {
-    agent none 
+pipeline {    
     stages {
         stage('Example Build') {
             agent { docker 'maven:3-alpine' } 
