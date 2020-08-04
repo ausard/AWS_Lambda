@@ -1,0 +1,21 @@
+- name: Install and start Jenkins
+  hosts: localhost
+
+  become: yes
+  gather_facts: yes
+
+  tasks:
+  - name: install python
+    raw: which python || (apt -y update && apt install -y python)
+    when: ansible_os_family == 'Debian'
+
+  - name: install python 
+    raw: which python || (yum -y update && yum install -y python)
+    when: ansible_os_family == 'RedHat'
+
+  - name: Set timezone to Europe/Minsk
+    timezone:
+      name: Europe/Minsk
+
+  - include_role:
+      name: jenkins

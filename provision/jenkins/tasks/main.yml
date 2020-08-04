@@ -1,0 +1,41 @@
+# Setup/install tasks.
+---
+- include_tasks: setup-{{ ansible_os_family }}.yml
+
+- name: Add the user 'jenkins' to groups root and docker
+  user:
+    name: jenkins
+    comment: jenkins
+    groups: root, docker
+    append: yes
+
+- name: Install lib for jenkins ansible
+  pip:
+    name:
+    - python-jenkins
+    - docker
+
+
+- name: Enable and Start the Jenkins Service
+  service:
+    name: jenkins
+    enabled: yes
+    state: started
+
+- name: sleep for 30 seconds and continue with play
+  wait_for: timeout=30
+  delegate_to: localhost
+
+
+- name: Get init password Jenkins
+  shell: cat /var/lib/jenkins/secrets/initialAdminPassword
+  changed_when: false
+  register: result
+
+- name: Print init password Jenkins
+  debug:
+    var: result.stdout
+
+- name: Print success Jenkins message
+  debug:
+    msg: "Open your browser at http://localhost:8080/ and insert {{ result.stdout }}"

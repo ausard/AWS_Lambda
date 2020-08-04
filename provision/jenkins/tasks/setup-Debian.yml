@@ -1,0 +1,23 @@
+- name: Install required jenkins packages
+  apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  loop: ['openjdk-8-jdk', 'python-pip', 'net-tools']
+
+- name: Import Jenkins Key
+  apt_key:
+    url: https://pkg.jenkins.io/debian/jenkins-ci.org.key
+    state: present
+
+- name: Download jenkins repository
+  apt_repository:
+    repo: deb http://pkg.jenkins.io/debian-stable binary/
+    state: present
+    filename:  jenkins.list
+
+- name: Install service Jenkins from repository
+  apt:
+    update_cache: yes
+    name: jenkins
+    state: present
