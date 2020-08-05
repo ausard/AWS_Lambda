@@ -23,9 +23,9 @@ pipeline {
             }          
         }        
         stage("first"){
-            steps(
+            steps{
                 echo 'hi'
-            )
+            }                      
         }
     }
     post{
