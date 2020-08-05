@@ -28,7 +28,7 @@ pipeline {
                         outputTemplateFile: 'temp.yml',
                         region: 'eu-central-1',
                         roleArn: '',
-                        s3Bucket: 'sam-deployment-bucket',
+                        s3Bucket: 'sam-deployment-bucket-ausard',
                         stackName: 'HelloSAMApp',
                         templateFile: 'template.yml'])
                 }
