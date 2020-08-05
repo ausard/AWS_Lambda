@@ -1,6 +1,6 @@
 subnet = '192.168.50.'
-server_cpus = 2
-server_memory = 1024
+server_cpus = 1
+server_memory = 512
 
 Vagrant.configure('2') do |config|
   config.vm.box = 'centos/7'
@@ -22,6 +22,7 @@ Vagrant.configure('2') do |config|
 
     jenkins_srv.vm.hostname = 'jenkins'
     jenkins_srv.vm.network :forwarded_port, guest: 8080, host: 8080
+    jenkins_srv.vm.network :forwarded_port, guest: 3000, host: 3000
 
     # Install Jenkins
     jenkins_srv.vm.provision "ansible_local" do |ansible|      

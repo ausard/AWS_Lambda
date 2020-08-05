@@ -9,6 +9,10 @@
     name: "{{ item }}"
   loop: ['wget', 'git', 'python-pip', 'net-tools']
 
+# - name: Install SAM AWS
+#   pip:
+#     name: aws-sam-cli  
+
 
 - name: Download Jenkins repo yum URL for  
   get_url:
