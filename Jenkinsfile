@@ -19,20 +19,17 @@ pipeline {
                 dir("HelloWorldFunction"){
                     sh './gradlew clean build'
                 }                                
-            
-                archiveArtifacts 'HelloWorldFunction/build/libs/HelloWorldFunction.jar'
+                            
                 samDeploy([
                         credentialsId: 'AWS',
                         kmsKeyId: '',
-                        outputTemplateFile: '',
+                        outputTemplateFile: 'temp.yml',
                         region: 'eu-central-1',
                         roleArn: '',
-                        s3Bucket: 'sam-jenkins',
-                        s3Prefix: '',
-                        stackName: 'hello-jenkins',
+                        s3Bucket: 'sam-deployment-bucket',
+                        stackName: 'HelloSAMApp',
                         templateFile: 'template.yml'])
-            }
-                     
+            }                     
         }                
     }
     post{
