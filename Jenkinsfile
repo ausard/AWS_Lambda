@@ -21,6 +21,16 @@ pipeline {
             }
             success{
                 archiveArtifacts 'HelloWorldFunction/build/libs/HelloWorldFunction.jar'
+                samDeploy([
+                        credentialsId: 'AWS',
+                        kmsKeyId: '',
+                        outputTemplateFile: '',
+                        region: 'eu-central-1',
+                        roleArn: '',
+                        s3Bucket: 'sam-jenkins',
+                        s3Prefix: '',
+                        stackName: 'hello-jenkins',
+                        templateFile: 'template.yml'])
             }          
         }                
     }
