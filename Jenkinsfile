@@ -18,8 +18,7 @@ pipeline {
                 dir("HelloWorldFunction"){
                     sh './gradlew clean build'
                 }                
-                
-                // archiveArtifacts 'build/libs/app.war'
+                archiveArtifacts 'HelloWorldFunction/build/libs/HelloWorldFunction.jar'
             }          
         }        
         stage("first"){
