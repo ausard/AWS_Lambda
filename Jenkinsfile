@@ -17,15 +17,12 @@ pipeline {
             steps{
                 dir("HelloWorldFunction"){
                     sh './gradlew clean build'
-                }                
+                }                                
+            }
+            success{
                 archiveArtifacts 'HelloWorldFunction/build/libs/HelloWorldFunction.jar'
             }          
-        }        
-        stage("first"){
-            steps{
-                echo 'hi'
-            }                      
-        }
+        }                
     }
     post{
         success{  
