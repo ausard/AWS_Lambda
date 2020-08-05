@@ -22,7 +22,8 @@ pipeline {
         stage("Gradle build"){
             steps{
                 dir("HelloWorldFunction"){
-                    sh './gradlew clean build'
+                    // sh './gradlew clean build'
+                    echo 'build'
                 }
             }
             post{
