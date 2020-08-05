@@ -13,13 +13,13 @@ pipeline {
                 git 'https://github.com/ausard/AWS_Lambda.git'
             }          
         }
+                
         stage("Gradle build"){
             steps{
                 dir("HelloWorldFunction"){
                     sh './gradlew clean build'
                 }                                
-            }
-            success{
+            
                 archiveArtifacts 'HelloWorldFunction/build/libs/HelloWorldFunction.jar'
                 samDeploy([
                         credentialsId: 'AWS',
@@ -31,7 +31,8 @@ pipeline {
                         s3Prefix: '',
                         stackName: 'hello-jenkins',
                         templateFile: 'template.yml'])
-            }          
+            }
+                     
         }                
     }
     post{
