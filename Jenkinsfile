@@ -15,8 +15,10 @@ pipeline {
         }
         stage("Gradle build"){
             steps{
-                dir("HelloWorldFunction")                
-                sh './gradlew clean build'
+                dir("HelloWorldFunction"){
+                    sh './gradlew clean build'
+                }                
+                
                 // archiveArtifacts 'build/libs/app.war'
             }          
         }        
