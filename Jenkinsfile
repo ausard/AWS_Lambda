@@ -18,9 +18,11 @@ pipeline {
             steps{
                 dir("HelloWorldFunction"){
                     sh './gradlew clean build'
-                }                                
-                            
-                samDeploy([
+                }
+            }
+            post{
+                success{
+                    samDeploy([
                         credentialsId: 'AWS',
                         kmsKeyId: '',
                         outputTemplateFile: 'temp.yml',
@@ -29,6 +31,7 @@ pipeline {
                         s3Bucket: 'sam-deployment-bucket',
                         stackName: 'HelloSAMApp',
                         templateFile: 'template.yml'])
+                }
             }                     
         }                
     }
