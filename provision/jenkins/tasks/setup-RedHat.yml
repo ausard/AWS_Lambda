@@ -18,6 +18,9 @@
 - name: install aws-sam-cli
   shell: python3 -m pip install aws-sam-cli
 
+- name: install aws-sam-cli
+  shell: pip3 install --upgrade aws-cli
+
 # - name: Install SAM AWS
 #   pip:
 #     name: aws-sam-cli  
