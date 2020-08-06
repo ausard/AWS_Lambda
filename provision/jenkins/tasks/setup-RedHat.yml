@@ -9,6 +9,10 @@
     name: "{{ item }}"
   loop: ['wget', 'git', 'python-pip', 'net-tools']
 
+- homebrew:
+    name: aws-sam-cli
+    state: present
+    
 # - name: Install SAM AWS
 #   pip:
 #     name: aws-sam-cli  

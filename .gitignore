@@ -1,4 +1,5 @@
 .vagrant/
 .vscode/
-HelloWorldFunction/build/
-HelloWorldFunction/.gradle/
+./HelloWorldFunction/build
+.aws-sam/
+HelloWorldFunction/.gradle
