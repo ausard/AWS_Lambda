@@ -10,8 +10,7 @@ pipeline {
     stages {       
         stage("Prepare Ws"){
             steps{
-                cleanWs()
-                sh '/home/linuxbrew/.linuxbrew/bin/brew reinstall aws-sam-cli'
+                cleanWs()                
             }          
         }
         stage("Git clone"){
