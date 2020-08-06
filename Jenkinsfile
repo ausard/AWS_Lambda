@@ -41,8 +41,8 @@ pipeline {
                         // stackName: 'HelloSAMApp',
                         // templateFile: 'template.yml'])                                     
                 //    sh 'aws s3 mb s3://sam-deployment-bucket-ausard'
-                sh 'pipenv run sam build'
-                sh 'pipenv run sam deploy'
+                sh 'sam build'
+                sh 'sam deploy'
                 }
             }                     
         }                
