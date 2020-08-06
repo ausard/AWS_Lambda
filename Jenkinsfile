@@ -10,8 +10,11 @@ pipeline {
     stages {       
         stage("Prepare Ws"){
             steps{
-                sh 'python3 -m pip install aws-sam-cli'
                 cleanWs()                
+                sh 'pip install --upgrade pip'
+                sh 'pip install pipenv --user'
+                sh 'pipenv install awscli aws-sam-cli'
+
             }          
         }
         stage("Git clone"){
@@ -28,15 +31,16 @@ pipeline {
             }
             post{
                 success{                   
-                        samDeploy([
-                        credentialsId: 'aws',
-                        outputTemplateFile: 'template-output.yml',
-                        region: 'eu-central-1',
-                        s3Bucket: 'sam-deployment-bucket-ausard',
-                        stackName: 'HelloSAMApp',
-                        templateFile: 'template.yml'])                                     
+                        // samDeploy([
+                        // credentialsId: 'aws',
+                        // outputTemplateFile: 'template-output.yml',
+                        // region: 'eu-central-1',
+                        // s3Bucket: 'sam-deployment-bucket-ausard',
+                        // stackName: 'HelloSAMApp',
+                        // templateFile: 'template.yml'])                                     
                 //    sh 'aws s3 mb s3://sam-deployment-bucket-ausard'
-                //    sh 'make sam'
+                sh 'pipenv run sam build'
+                sh 'pipenv run sam deploy'
                 }
             }                     
         }                
