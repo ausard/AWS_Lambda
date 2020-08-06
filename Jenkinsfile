@@ -10,10 +10,12 @@ pipeline {
     stages {       
         stage("Prepare Ws"){
             steps{
-                cleanWs()                
+                cleanWs()
+                echo "--------INSTALL PHASE--------"                
                 sh 'pip install --upgrade pip'
-                sh 'pip install pipenv --user'
-                sh 'pipenv install awscli aws-sam-cli'
+                sh 'pip install pipenv --user'                
+                sh 'pip3 install aws-sam-cli'
+                //sh 'pipenv install awscli aws-sam-cli'
 
             }          
         }
