@@ -41,8 +41,13 @@ pipeline {
                         // stackName: 'HelloSAMApp',
                         // templateFile: 'template.yml'])                                     
                 //    sh 'aws s3 mb s3://sam-deployment-bucket-ausard'
-                sh '/usr/local/bin/sam build'
-                sh '/usr/local/bin/sam deploy'
+                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'aws', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {                    
+                    sh 'export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID'
+                    sh 'export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY'
+                    sh '/usr/local/bin/sam build'
+                    sh '/usr/local/bin/sam deploy'
+                }
+                
                 }
             }                     
         }                
