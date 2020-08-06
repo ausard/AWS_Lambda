@@ -29,7 +29,7 @@ pipeline {
             post{
                 success{                   
                         samDeploy([
-                        credentialsId: 'AWS',
+                        credentialsId: 'aws',
                         outputTemplateFile: 'template-output.yml',
                         region: 'eu-central-1',
                         s3Bucket: 'sam-deployment-bucket-ausard',
