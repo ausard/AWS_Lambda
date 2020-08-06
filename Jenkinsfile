@@ -26,16 +26,14 @@ pipeline {
                 }
             }
             post{
-                success{
-                    dir("HelloWorldFunction"){
+                success{                   
                         samDeploy([
                         credentialsId: 'AWS',
                         outputTemplateFile: 'template-output.yml',
                         region: 'eu-central-1',
                         s3Bucket: 'sam-deployment-bucket-ausard',
                         stackName: 'HelloSAMApp',
-                        templateFile: 'template.yml'])
-                    }                    
+                        templateFile: 'HelloWorldFunction/template.yml'])                                     
                 }
             }                     
         }                
