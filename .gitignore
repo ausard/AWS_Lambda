@@ -1,2 +1,4 @@
 .vagrant/
-.vscode/launch.json
+.vscode/
+HelloWorldFunction/build/
+HelloWorldFunction/.gradle/
