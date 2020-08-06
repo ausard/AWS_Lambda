@@ -34,7 +34,7 @@ pipeline {
                         region: 'eu-central-1',
                         s3Bucket: 'sam-deployment-bucket-ausard',
                         stackName: 'HelloSAMApp',
-                        templateFile: 'HelloWorldFunction/template.yml'])                                     
+                        templateFile: 'template.yml'])                                     
                 //    sh 'aws s3 mb s3://sam-deployment-bucket-ausard'
                 //    sh 'make sam'
                 }
