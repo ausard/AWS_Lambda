@@ -14,7 +14,7 @@ pipeline {
                 echo "--------INSTALL PHASE--------"                
                 sh 'pip install --upgrade pip'
                 sh 'pip install pipenv --user'                
-                sh 'pip3 install aws-sam-cli'
+                // sh 'pip3 install aws-sam-cli'
                 //sh 'pipenv install awscli aws-sam-cli'
 
             }          
@@ -41,8 +41,8 @@ pipeline {
                         // stackName: 'HelloSAMApp',
                         // templateFile: 'template.yml'])                                     
                 //    sh 'aws s3 mb s3://sam-deployment-bucket-ausard'
-                sh 'sam build'
-                sh 'sam deploy'
+                sh '/usr/local/bin/sam build'
+                sh '/usr/local/bin/sam deploy'
                 }
             }                     
         }                
