@@ -10,7 +10,7 @@ pipeline {
     stages {       
         stage("Prepare Ws"){
             steps{
-                sh 'python3 -m pip install --user aws-sam-cli'
+                sh 'python3 -m pip install aws-sam-cli'
                 cleanWs()                
             }          
         }
