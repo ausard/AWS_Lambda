@@ -10,12 +10,29 @@ Globals:
   Function:
     Timeout: 20
 
+Parameters:
+  StageName:
+    Type: String
+    Default: dev
+    Description: The Lambda Function Stage
+
 Resources:
+
+  RestApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      Name:
+        Fn::Sub: helloworld-app-api-${StageName}
+      StageName:
+        Ref: StageName
+
   HelloWorldFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
-      CodeUri: HelloWorldFunction
-      Handler: java.main.helloworld.App::handleRequest
+      FunctionName:
+        Fn::Sub: helloworld-app-${StageName}      
+      CodeUri: build/libs/HelloWorldFunction.jar
+      Handler: helloworld.App::handleRequest
       Runtime: java8
       Description: 'Hello From Lambda'     
       # Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
@@ -27,6 +44,8 @@ Resources:
           Properties:
             Path: /
             Method: get
+            RestApiId:
+              Ref: RestApi
 
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
