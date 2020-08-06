@@ -22,18 +22,15 @@ pipeline {
         stage("Gradle build"){
             steps{
                 dir("HelloWorldFunction"){
-                    // sh './gradlew clean build'
-                    echo 'build'
+                    sh './gradlew clean build'                    
                 }
             }
             post{
                 success{
                     samDeploy([
                         credentialsId: 'AWS',
-                        kmsKeyId: '',
-                        outputTemplateFile: 'temp.yml',
+                        outputTemplateFile: 'package.yml',
                         region: 'eu-central-1',
-                        roleArn: '',
                         s3Bucket: 'sam-deployment-bucket-ausard',
                         stackName: 'HelloSAMApp',
                         templateFile: 'template.yml'])
