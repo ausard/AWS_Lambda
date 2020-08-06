@@ -28,15 +28,15 @@ pipeline {
             }
             post{
                 success{                   
-                        // samDeploy([
-                        // credentialsId: 'AWS',
-                        // outputTemplateFile: 'template-output.yml',
-                        // region: 'eu-central-1',
-                        // s3Bucket: 'sam-deployment-bucket-ausard',
-                        // stackName: 'HelloSAMApp',
-                        // templateFile: 'HelloWorldFunction/template.yml'])                                     
+                        samDeploy([
+                        credentialsId: 'AWS',
+                        outputTemplateFile: 'template-output.yml',
+                        region: 'eu-central-1',
+                        s3Bucket: 'sam-deployment-bucket-ausard',
+                        stackName: 'HelloSAMApp',
+                        templateFile: 'HelloWorldFunction/template.yml'])                                     
                 //    sh 'aws s3 mb s3://sam-deployment-bucket-ausard'
-                   sh 'make sam'
+                //    sh 'make sam'
                 }
             }                     
         }                
