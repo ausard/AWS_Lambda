@@ -34,8 +34,7 @@ pipeline {
                         // s3Bucket: 'sam-deployment-bucket-ausard',
                         // stackName: 'HelloSAMApp',
                         // templateFile: 'HelloWorldFunction/template.yml'])                                     
-                    sh 'sam build'
-	                sh 'sam deploy'
+                   sh 'make sam'
                 }
             }                     
         }                
