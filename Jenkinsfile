@@ -11,12 +11,6 @@ pipeline {
         stage("Prepare Ws"){
             steps{
                 cleanWs()
-                echo "--------INSTALL PHASE--------"                
-                sh 'pip install --upgrade pip'
-                sh 'pip install pipenv --user'                
-                // sh 'pip3 install aws-sam-cli'
-                //sh 'pipenv install awscli aws-sam-cli'
-
             }          
         }
         stage("Git clone"){
@@ -51,10 +45,5 @@ pipeline {
                 }
             }                     
         }                
-    }
-    post{
-        success{  
-          echo "Open your browser at http://localhost:8081/"
-        }
-    }      
+    }    
 } 
