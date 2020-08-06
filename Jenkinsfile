@@ -8,9 +8,10 @@ pipeline {
 //        extendedChoice bindings: '', defaultValue: '9', description: 'Image version : ', groovyClasspath: '', groovyScriptFile: '/vagrant/groovy.script', multiSelectDelimiter: ',', name: 'VERSION', quoteValue: false, saveJSONParameterToFile: false, type: 'PT_SINGLE_SELECT', visibleItemCount: 5
 //    }  
     stages {       
-        stage("Clean Ws"){
+        stage("Prepare Ws"){
             steps{
                 cleanWs()
+                sh 'brew install aws-sam-cli'
             }          
         }
         stage("Git clone"){
