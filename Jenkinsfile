@@ -7,9 +7,9 @@ pipeline {
 //    parameters {
 //        extendedChoice bindings: '', defaultValue: '9', description: 'Image version : ', groovyClasspath: '', groovyScriptFile: '/vagrant/groovy.script', multiSelectDelimiter: ',', name: 'VERSION', quoteValue: false, saveJSONParameterToFile: false, type: 'PT_SINGLE_SELECT', visibleItemCount: 5
 //    } 
-    parameters {
-        booleanParam defaultValue: false, description: 'Building App with Libs', name: 'BuildWithLibs'
-    } 
+    // parameters {
+    //     booleanParam defaultValue: false, description: 'Building App with Libs', name: 'BuildWithLibs'
+    // } 
     stages {       
         stage("Prepare Ws"){
             steps{
@@ -37,7 +37,7 @@ pipeline {
                   secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {                                        
                     sh 'export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID'
                     sh 'export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY'
-                    if ( params.BuildWithLibs == true ) {
+                    if ( params.BuildWithLibs ) {
                             dir ("HelloWorldFunctionLibs"){
                                 sh './gradlew clean build'
                             }
