@@ -3,3 +3,4 @@
 ./HelloWorldFunction/build
 .aws-sam/
 HelloWorldFunction/.gradle
+./HelloWorldFunctionLibs/build

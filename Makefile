@@ -3,7 +3,7 @@ default:
 	aws cloudformation deploy --template-file sam-template-output.yaml --stack-name HelloSAMApp --capabilities CAPABILITY_IAM
 sam:	
 	sam build
-	sam deploy 
+	sam deploy
 
 
 

@@ -22,7 +22,7 @@ Vagrant.configure('2') do |config|
 
     jenkins_srv.vm.hostname = 'jenkins'
     jenkins_srv.vm.network :forwarded_port, guest: 8080, host: 8080
-    jenkins_srv.vm.network :forwarded_port, guest: 3000, host: 3000
+    # jenkins_srv.vm.network :forwarded_port, guest: 3000, host: 3000
 
     # Install Jenkins
     jenkins_srv.vm.provision "ansible_local" do |ansible|      
