@@ -31,22 +31,23 @@ pipeline {
         }
         stage("Build and Deploy the application"){            
             steps{
-                 withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'aws', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {                                        
+                 withCredentials([[$class: 'AmazonWebServicesCredentialsBinding',
+                  accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+                  credentialsId: 'aws',
+                  secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {                                        
                     sh 'export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID'
                     sh 'export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY'
-                    script{
-                        if ( params.BuildWithLibs ) {
+                    if ( params.BuildWithLibs == true ) {
                             dir ("HelloWorldFunctionLibs"){
                                 sh './gradlew clean build'
                             }
                             sh '/usr/local/bin/sam package --template-file template_with_lib.yml --output-template-file packaged.yml --s3-bucket sam-deployment-bucket-ausard'
 	                        sh '/usr/local/bin/sam deploy --template-file packaged.yml'                    
-                        }
-                        if !( params.BuildWithLibs ){
+                        }else{
                             sh '/usr/local/bin/sam build'
                             sh '/usr/local/bin/sam deploy'                    
                         }
-                    }                  
+                                      
                 }
             }
         }                
