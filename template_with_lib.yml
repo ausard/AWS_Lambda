@@ -26,6 +26,23 @@ Resources:
       StageName:
         Ref: StageName
 
+  HelloWorldFunctionLibs:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      FunctionName:
+        Fn::Sub: helloworld-app-libs-${StageName}      
+      CodeUri: HelloWorldFunctionLibs/build/distributions/HelloWorldFunctionLibs.zip
+      Handler: example.Library
+      Runtime: java8
+      Policies:
+        - AWSLambdaBasicExecutionRole
+        - AWSLambdaReadOnlyAccess
+        - AWSXrayWriteOnlyAccess
+        - AWSLambdaVPCAccessExecutionRole
+      Tracing: Active
+     
+
+
   HelloWorldFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
