@@ -25,10 +25,8 @@ public class App implements RequestHandler<APIGatewayProxyRequestEvent, APIGatew
 
         APIGatewayProxyResponseEvent response = new APIGatewayProxyResponseEvent()
                 .withHeaders(headers);
-        try {
-            // final String pageContents = this.getPageContents("https://checkip.amazonaws.com");
-            // String output = String.format("{ \"message\": \"hello world\", \"location\": \"%s\" }", pageContents);
-            String output = "<h1>Hello from lambda function</h1>";
+        try {      
+            String output = "<h1>Hello from Aliaksei Sabetski</h1>";
             return response
                     .withStatusCode(200)
                     .withBody(output);
