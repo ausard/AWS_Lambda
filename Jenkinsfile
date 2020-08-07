@@ -29,7 +29,10 @@ pipeline {
                 }
             }            
         }
-        stage("Build and Deploy the application"){            
+        stage("Build and Deploy the application"){
+            when {
+                 expression { params.BuildWithLibs == true }
+            }            
             steps{
                  withCredentials([[$class: 'AmazonWebServicesCredentialsBinding',
                   accessKeyVariable: 'AWS_ACCESS_KEY_ID',
@@ -37,17 +40,14 @@ pipeline {
                   secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {                                        
                     sh 'export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID'
                     sh 'export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY'
-                    if ( params.BuildWithLibs ) {
-                            dir ("HelloWorldFunctionLibs"){
-                                sh './gradlew clean build'
-                            }
-                            sh '/usr/local/bin/sam package --template-file template_with_lib.yml --output-template-file packaged.yml --s3-bucket sam-deployment-bucket-ausard'
-	                        sh '/usr/local/bin/sam deploy --template-file packaged.yml'                    
-                        }else{
-                            sh '/usr/local/bin/sam build'
-                            sh '/usr/local/bin/sam deploy'                    
-                        }
-                                      
+                    dir ("HelloWorldFunctionLibs"){
+                      sh './gradlew clean build'
+                    }
+                    sh '/usr/local/bin/sam package --template-file template_with_lib.yml --output-template-file packaged.yml --s3-bucket sam-deployment-bucket-ausard'
+	                sh '/usr/local/bin/sam deploy --template-file packaged.yml'                    
+
+                    // sh '/usr/local/bin/sam build'
+                    // sh '/usr/local/bin/sam deploy'                    
                 }
             }
         }                
