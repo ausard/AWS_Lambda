@@ -24,9 +24,10 @@ pipeline {
                 dir("HelloWorldFunction"){
                     sh './gradlew clean build'                    
                 }
-            }
-            post{
-                success{                   
+            }            
+        }
+        stage("Build and Deploy the application"){
+            steps{
                         // samDeploy([
                         // credentialsId: 'aws',
                         // outputTemplateFile: 'template-output.yml',
@@ -34,18 +35,16 @@ pipeline {
                         // s3Bucket: 'sam-deployment-bucket-ausard',
                         // stackName: 'HelloSAMApp',
                         // templateFile: 'template.yml'])                                     
-                //    sh 'aws s3 mb s3://sam-deployment-bucket-ausard'
+                        //    sh 'aws s3 mb s3://sam-deployment-bucket-ausard'
 
-                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'aws', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {                                        
+                 withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'aws', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {                                        
                     sh 'export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID'
                     sh 'export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY'
                   
                     sh '/usr/local/bin/sam build'
                     sh '/usr/local/bin/sam deploy'
                 }
-                
-                }
-            }                     
+            }
         }                
     }    
 } 
