@@ -4,6 +4,15 @@ default:
 sam:	
 	sam build
 	sam deploy
+sam-libs:
+	sam build --template-file template_with_lib.yml
+	sam deploy --template-file template_with_lib.yml
+sam-p:
+	sam package \
+    --template-file template_p.yml \
+    --output-template-file packaged.yml \
+    --s3-bucket sam-deployment-bucket-ausard
+	sam deploy --template-file packaged.yml
 
 
 
