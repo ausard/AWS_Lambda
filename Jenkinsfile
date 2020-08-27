@@ -2,12 +2,11 @@
 pipeline {
    agent any
    options{
-      timestamps()
-
+      timestamps()      
    }
-    // parameters {
-    //     booleanParam defaultValue: false, description: 'Building App with Libs', name: 'BuildWithLibs'
-    // } 
+    parameters {
+        booleanParam defaultValue: false, description: 'Building App with Libs', name: 'BuildWithLibs'
+    }
     stages {
         stage("Prepare Ws"){
             steps{
