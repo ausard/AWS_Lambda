@@ -1,15 +1,15 @@
 version: '3.3'
 services:  
-  registry:
-    container_name: registry
-    restart: always
-    image: registry:2
-    ports:
-      - 5000:5000
-    volumes:
-    - ./data:/var/lib/registry    
-    networks:
-      - network  
+  # registry:
+  #   container_name: registry
+  #   restart: always
+  #   image: registry:2
+  #   ports:
+  #     - 5000:5000
+  #   volumes:
+  #   - ./data:/var/lib/registry    
+  #   networks:
+  #     - network  
 
   nexus:
     container_name: nexus
